@@ -64,6 +64,113 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Chai assertion library advanced",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a93dc2d3-a178-418b-bd40-96f33e2c5b21",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"",
+							"let manufacturer;",
+							"",
+							"for (let filter of  jsonData.filters){",
+							"    if (filter.name == \"MANUFACTURER\"){",
+							"         manufacturer = filter;",
+							"    }",
+							"}",
+							"",
+							"console.log(manufacturer)",
+							"",
+							"pm.test(\"Manufactured should not be allowed\", function(){",
+							"    pm.expect(manufacturer.name).to.eql(\"MANUFACTURER\");",
+							"    pm.expect(manufacturer.isAllowed).to.be.false;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab350d62f00005a00ca3663",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab350d62f00005a00ca3663"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chai library assertion for nested objects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c4b5c02-c7e8-432c-a5f8-cf11296faea2",
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"",
+							"let commentsStatus = jsonData.prefs.comments.status; ",
+							"console.log(commentsStatus)",
+							"pm.test(\"Comments should be disabled\", function(){",
+							"    pm.expect(commentsStatus).to.eql(\"disabled\")",
+							"});",
+							"",
+							"let boardStatus;",
+							"",
+							"for (let key in jsonData.limits){",
+							"    if (key, jsonData.limits[key].hasOwnProperty('boards')){",
+							"        boardStatus = jsonData.limits[key].boards.totalPerMember.status;",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Status should be OK\", function () {",
+							"    pm.expect(boardStatus).to.eql(\"ok\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://www.mocky.io/v2/5ab34d8c2f00006600ca3652",
+					"protocol": "http",
+					"host": [
+						"www",
+						"mocky",
+						"io"
+					],
+					"path": [
+						"v2",
+						"5ab34d8c2f00006600ca3652"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
