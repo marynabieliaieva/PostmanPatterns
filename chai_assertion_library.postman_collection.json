@@ -143,7 +143,22 @@
 							"",
 							"pm.test(\"Status should be OK\", function () {",
 							"    pm.expect(boardStatus).to.eql(\"ok\");",
-							"});"
+							"});",
+							"",
+							"pm.test(\"Headers content-Type is present\", function () {",
+							"    pm.response.headers.get('Via');",
+							"    pm.response.to.have.header('Date');",
+							"    pm.expect(pm.response.headers.get('Server')).to.eql('Cowboy');",
+							"});",
+							"",
+							"",
+							"//Cookies",
+							"pm.test(\"Cookies content-Type is present\", function () {",
+							"    pm.expect(pm.cookies.has('sessionId')).to.be.false;",
+							"    //pm.expect(pm.cookies.get('sessionId')).to.eql(’ad3se3ss8sg7sg3');",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
