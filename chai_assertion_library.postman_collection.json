@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "571f9ea1-0c51-404d-a5c6-ba07c1a275d3",
+		"name": "explanation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Chai assertion library",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f581e009-c900-4d65-8806-793d6836b140",
+						"exec": [
+							"pm.test(\"Your test name\", function(){",
+							"    let a ={",
+							"        \"name\":\"John\"",
+							"    };",
+							"    let b = {",
+							"        \"name\":\"John\",",
+							"    };",
+							"    ",
+							"    //verify if value a is equal value b",
+							"    pm.expect(a).to.eql(b, '1');",
+							"    ",
+							"    //verify that a the exactly the same object as b",
+							"    pm.expect(a).to.not.equal(b, '2');",
+							"});",
+							"",
+							"",
+							"// Different assertions",
+							"pm.test(\"Your test\", function (){",
+							"    pm.expect(true).to.be.true;",
+							"    pm.expect(false).to.be.false;",
+							"    pm.expect(null).to.be.null;",
+							"    pm.expect(undefined).to.be.undefined;",
+							"    pm.expect([]).to.be.empty;",
+							"    pm.expect([].length).to.eql(0);",
+							"    pm.expect([1,2,3]).to.include(2);",
+							"    pm.expect(2).to.be.oneOf([1,2,3]);",
+							"    pm.expect('John Doe').to.match(/^John/);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

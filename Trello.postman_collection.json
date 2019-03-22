@@ -56,7 +56,7 @@
 							"    pm.expect(response.prefs.permissionLevel).eql(\"private\");",
 							"});",
 							"",
-							"pm.globals.set(\"boardId\", response.id);"
+							"pm.environment.set(\"boardId\", response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -124,10 +124,10 @@
 							"});",
 							"",
 							"pm.test(\"List was created inside the properly board\", function () {",
-							"    pm.expect(response.idBoard).eql(pm.globals.get(\"boardId\"));",
+							"    pm.expect(response.idBoard).eql(pm.environment.get(\"boardId\"));",
 							"});",
 							"",
-							"pm.globals.set(\"todoListId\", response.id);"
+							"pm.environment.set(\"todoListId\", response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -207,10 +207,10 @@
 							"});",
 							"",
 							"pm.test(\"List was created inside the properly board\", function () {",
-							"    pm.expect(response.idBoard).eql(pm.globals.get(\"boardId\"));",
+							"    pm.expect(response.idBoard).eql(pm.environment.get(\"boardId\"));",
 							"});",
 							"",
-							"pm.globals.set(\"doneListId\", response.id);"
+							"pm.environment.set(\"doneListId\", response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -284,14 +284,14 @@
 							"pm.test(\"Card should be created\", function () {\r",
 							"    pm.expect(response.name).eql(pm.environment.get(\"cardName\"));\r",
 							"    pm.expect(response.closed).to.eql(false);\r",
-							"    pm.expect(response.idList).to.eql(pm.globals.get(\"todoListId\"));\r",
-							"    pm.expect(response.idBoard).to.eql(pm.globals.get(\"boardId\"));\r",
+							"    pm.expect(response.idList).to.eql(pm.environment.get(\"todoListId\"));\r",
+							"    pm.expect(response.idBoard).to.eql(pm.environment.get(\"boardId\"));\r",
 							"});\r",
 							"pm.test(\"Card should have no votes or attachments\", function () {\r",
 							"    pm.expect(response.badges.votes).to.eql(0);\r",
 							"    pm.expect(response.badges.attachmentsByType.trello.card).to.eql(0);\r",
 							"});\r",
-							"pm.globals.set(\"cardId\", response.id);"
+							"pm.environment.set(\"cardId\", response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -361,13 +361,13 @@
 							"});",
 							"pm.test(\"Card should have new list\", function () {",
 							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.idList).to.eql(pm.globals.get(\"doneListId\"));",
+							"    pm.expect(jsonData.idList).to.eql(pm.environment.get(\"doneListId\"));",
 							"});",
 							"pm.test(\"Card should preserve properties\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.name).to.eql(\"Learn Postman\");",
 							"    pm.expect(jsonData.closed).to.eql(false);",
-							"    pm.expect(jsonData.idBoard).to.eql(pm.globals.get(\"boardId\"));",
+							"    pm.expect(jsonData.idBoard).to.eql(pm.environment.get(\"boardId\"));",
 							"});",
 							"",
 							""
@@ -596,7 +596,179 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all boards",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://api.trello.com/1/members/marina18713026/boards?key={{trelloKey}}&token={{trelloToken}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"members",
+								"marina18713026",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{trelloKey}}"
+								},
+								{
+									"key": "token",
+									"value": "{{trelloToken}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "Surrogate-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, must-revalidate, no-cache, no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "Thu, 01 Jan 1970 00:00:00"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Trello-Version",
+							"value": "1.1584.0"
+						},
+						{
+							"key": "X-Trello-Environment",
+							"value": "Production"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, PUT, POST, DELETE"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Authorization, Accept, Content-Type"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-KEY-INTERVAL-MS",
+							"value": "10000"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-KEY-MAX",
+							"value": "300"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-KEY-REMAINING",
+							"value": "298"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-TOKEN-INTERVAL-MS",
+							"value": "10000"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-TOKEN-MAX",
+							"value": "100"
+						},
+						{
+							"key": "X-RATE-LIMIT-API-TOKEN-REMAINING",
+							"value": "98"
+						},
+						{
+							"key": "X-RATE-LIMIT-MEMBER-INTERVAL-MS",
+							"value": "10000"
+						},
+						{
+							"key": "X-RATE-LIMIT-MEMBER-MAX",
+							"value": "200"
+						},
+						{
+							"key": "X-RATE-LIMIT-MEMBER-REMAINING",
+							"value": "199"
+						},
+						{
+							"key": "X-Server-Time",
+							"value": "1553185336419"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 21 Mar 2019 16:22:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				}
+			]
 		}
 	]
 }
