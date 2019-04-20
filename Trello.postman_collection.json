@@ -430,7 +430,10 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"",
+							"pm.environment.set(\"deleteBoardRequestId\", pm.info.requestId);"
 						],
 						"type": "text/javascript"
 					}
@@ -557,7 +560,27 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});"
+							"});",
+							"",
+							"// Parse the response body",
+							"var jsonData = pm.response.json();",
+							"",
+							"// Get the first object (element) from jsonData array",
+							"var firstBoard = jsonData.shift();",
+							"",
+							"if (firstBoard) {",
+							"    // Print the value",
+							"    console.log(firstBoard.id);",
+							"    ",
+							"    // Set the variable boardId with the first board id from the list retrieved",
+							"    pm.environment.set(\"boardId\", firstBoard.id);",
+							"    ",
+							"    // Set the next request to the delete board",
+							"    postman.setNextRequest(pm.environment.get(\"deleteBoardRequestId\"));",
+							"}",
+							" else {",
+							"    postman.setNextRequest(null);",
+							"}"
 						],
 						"type": "text/javascript"
 					}
