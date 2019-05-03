@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "32cece96-829a-4f68-8145-616a3553e85d",
+		"name": "Reusing tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "reusing 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81f96537-b8c2-46be-9a13-197f92ae05e8",
+						"exec": [
+							"eval(pm.environment.get(\"commonTests\"))();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1f7c40d8-fc11-4c2d-8c60-efb894d2284f",
+						"exec": [
+							"var commonTests = () => {",
+							"    pm.test(\"Status code is 200\", function () {",
+							"        pm.response.to.have.status(200);",
+							"    });",
+							"    ",
+							"    pm.test(\"Content-Type is present\", function () {",
+							"        pm.response.to.have.header(\"Content-Type\");",
+							"    });",
+							"    ",
+							"    pm.test(\"Response time is less than 400ms\", function () {",
+							"        pm.expect(pm.response.responseTime).to.be.below(400);",
+							"    });",
+							"}",
+							"",
+							"pm.environment.set(\"commonTests\", commonTests.toString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "example.com",
+					"host": [
+						"example",
+						"com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reusing 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8f1f272-6541-4bc8-aa64-8071cd93e8ec",
+						"exec": [
+							"eval(pm.environment.get(\"commonTests\"))();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "example.com/200",
+					"host": [
+						"example",
+						"com"
+					],
+					"path": [
+						"200"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
